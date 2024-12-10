@@ -83,7 +83,7 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
             tickets_available=(
                 F("cinema_hall__rows")
                 * F("cinema_hall__seats_in_row")
-                - Count("tickets") - 1
+                - Count("tickets")
             )
         )
     )
@@ -99,7 +99,7 @@ class MovieSessionViewSet(viewsets.ModelViewSet):
         if movie:
             queryset = queryset.filter(movie__id=movie)
 
-        return queryset
+        return queryset.distinct()
 
     def get_serializer_class(self):
         if self.action == "list":
