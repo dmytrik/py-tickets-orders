@@ -98,7 +98,7 @@ class Ticket(models.Model):
             seat: int,
             num_rows: int,
             num_seats: int,
-            error):
+            error: callable):
         if not (1 <= row <= num_rows):
             raise error(
                 {
